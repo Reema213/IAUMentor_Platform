@@ -8,7 +8,7 @@
     "dev": "nodemon server/server.js"
   },
   "keywords": ["mentorship", "education", "iau"],
-  "author": "Refah, Reema AlMulla, Lena",
+  "author": "Reema Aljaber, Reema AlMulla, Lena",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
