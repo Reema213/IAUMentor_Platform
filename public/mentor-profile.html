@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Mentors - IAUMentor</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+    <nav class="dashboard-nav">
+        <div class="container">
+            <div class="nav-brand">
+                <h2>IAUMentor</h2>
+            </div>
+            <div class="nav-user">
+                <a href="/dashboard.html" class="btn-secondary">← Back to Dashboard</a>
+                <button id="logoutBtn" class="btn-secondary">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li class="active"><a href="#" data-view="browse">🔍 Browse Mentors</a></li>
+                <li><a href="#" data-view="detail" class="hidden" id="detailLink">👤 Mentor Details</a></li>
+            </ul>
+        </aside>
+
+        <main class="dashboard-content">
+            <div id="browseView" class="content-section">
+                <h1>Find Your Mentor</h1>
+                <p class="subtitle">Browse and connect with experienced mentors</p>
+
+                <div class="card">
+                    <div class="search-bar">
+                        <input type="text" id="searchInput" placeholder="Search by name, interests, or expertise..." class="search-input">
+                        <button id="searchBtn" class="btn-primary">Search</button>
+                    </div>
+                </div>
+
+                <div id="mentorsGrid" class="mentors-grid">
+                    <p class="text-muted">Loading mentors...</p>
+                </div>
+            </div>
+
+            <div id="detailView" class="content-section hidden">
+                <button id="backToList" class="btn-secondary">← Back to List</button>
+                
+                <div id="mentorDetail">
+                    <p class="text-muted">Loading mentor details...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="bookingModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h2>Book a Session</h2>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="/js/mentor.js"></script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - IAUMentor</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+    <nav class="dashboard-nav">
+        <div class="container">
+            <div class="nav-brand">
+                <h2>IAUMentor</h2>
+            </div>
+            <div class="nav-user">
+                <a href="/dashboard.html" class="btn-secondary">← Back to Dashboard</a>
+                <button id="logoutBtn" class="btn-secondary">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li class="active"><a href="#" data-view="browse">🔍 Browse Events</a></li>
+                <li><a href="#" data-view="my">📋 My Events</a></li>
+                <li><a href="#" data-view="organized">🎯 My Organized</a></li>
+                <li><a href="#" data-view="create">➕ Create Event</a></li>
+            </ul>
+        </aside>
+
+        <main class="dashboard-content">
+            <div id="browseView" class="content-section">
+                <h1>Upcoming Events</h1>
+                <p class="subtitle">Discover workshops, webinars, and mentorship events</p>
+
+                <div id="eventsGrid" class="mentors-grid">
+                    <p class="text-muted">Loading events...</p>
+                </div>
+            </div>
+
+            <div id="myView" class="content-section hidden">
+                <h1>My Registered Events</h1>
+                <p class="subtitle">Events you're participating in</p>
+
+                <div id="myEventsGrid" class="mentors-grid">
+                    <p class="text-muted">Loading your events...</p>
+                </div>
+            </div>
+
+            <div id="organizedView" class="content-section hidden">
+                <h1>My Organized Events</h1>
+                <p class="subtitle">Events you've created</p>
+
+                <div id="organizedEventsGrid" class="mentors-grid">
+                    <p class="text-muted">Loading your organized events...</p>
+                </div>
+            </div>
+
+            <div id="createView" class="content-section hidden">
+                <h1>Create New Event</h1>
+                <p class="subtitle">Organize a workshop, webinar, or mentorship session</p>
+
+                <div id="createAlerts"></div>
+
+                <div class="card">
+                    <form id="createEventForm">
+                        <div class="form-group">
+                            <label for="eventTitle">Event Title</label>
+                            <input type="text" id="eventTitle" required placeholder="e.g., Python Workshop for Beginners">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="eventDescription">Description</label>
+                            <textarea id="eventDescription" rows="5" required placeholder="Describe what participants will learn..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="eventDate">Date</label>
+                            <input type="date" id="eventDate" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="eventTime">Time</label>
+                            <input type="time" id="eventTime" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="eventLocation">Location</label>
+                            <input type="text" id="eventLocation" required placeholder="e.g., Room 301, Building A or Zoom Link">
+                        </div>
+
+                        <button type="submit" class="btn-primary">Create Event</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="eventDetailModal" class="modal hidden">
+        <div class="modal-content" style="max-width: 700px;">
+            <span class="modal-close" onclick="closeEventModal()">&times;</span>
+            <div id="eventModalBody">
+                <p class="text-muted">Loading event details...</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="editEventModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeEditModal()">&times;</span>
+            <h2>Edit Event</h2>
+            <div id="editAlerts"></div>
+            <form id="editEventForm">
+                <input type="hidden" id="editEventId">
+                <div class="form-group">
+                    <label for="editEventTitle">Event Title</label>
+                    <input type="text" id="editEventTitle" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="editEventDescription">Description</label>
+                    <textarea id="editEventDescription" rows="5" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="editEventDate">Date</label>
+                    <input type="date" id="editEventDate" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="editEventTime">Time</label>
+                    <input type="time" id="editEventTime" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="editEventLocation">Location</label>
+                    <input type="text" id="editEventLocation" required>
+                </div>
+
+                <button type="submit" class="btn-primary">Update Event</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/events.js"></script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - IAUMentor</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+    <nav class="dashboard-nav">
+        <div class="container">
+            <div class="nav-brand">
+                <h2>IAUMentor</h2>
+            </div>
+            <div class="nav-user">
+                <span id="userName">User</span>
+                <button id="logoutBtn" class="btn-secondary">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li class="active"><a href="#" data-section="overview">📊 Overview</a></li>
+                <li><a href="#" data-section="profile">👤 My Profile</a></li>
+                <li id="mentorsLink" class="hidden"><a href="/mentor-profile.html">🎓 Find Mentors</a></li>
+                <li id="availabilityLink" class="hidden"><a href="#" data-section="availability">📅 My Availability</a></li>
+                <li id="sessionsLink"><a href="#" data-section="sessions">📚 My Sessions</a></li>
+                <li><a href="/progress.html">📈 Progress Tracking</a></li>
+                <li><a href="/events.html">📅 Events</a></li>
+                <li><a href="/resources.html">📚 Resources</a></li>
+                <li><a href="/messages.html">💬 Messages</a></li>
+                <li><a href="/forums.html">💭 Forums</a></li>
+            </ul>
+        </aside>
+
+        <main class="dashboard-content">
+            <div id="overviewSection" class="content-section">
+                <h1>Welcome, <span id="welcomeName">User</span>!</h1>
+                <p class="subtitle">Here's your activity overview</p>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📚</div>
+                        <div class="stat-info">
+                            <h3 id="stat1Value">0</h3>
+                            <p id="stat1Label">Sessions</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📖</div>
+                        <div class="stat-info">
+                            <h3 id="stat2Value">0</h3>
+                            <p id="stat2Label">Resources</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⭐</div>
+                        <div class="stat-info">
+                            <h3 id="stat3Value">0</h3>
+                            <p id="stat3Label">Events</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Recent Activity</h2>
+                    <div id="recentActivity">
+                        <p class="text-muted">No recent activity</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="profileSection" class="content-section hidden">
+                <h1>My Profile</h1>
+                
+                <div id="alertContainer"></div>
+
+                <div class="card">
+                    <h2>Personal Information</h2>
+                    <form id="profileForm">
+                        <div class="form-group">
+                            <label for="profileName">Full Name</label>
+                            <input type="text" id="profileName" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="profileEmail">Email</label>
+                            <input type="email" id="profileEmail" disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="profileRole">Role</label>
+                            <input type="text" id="profileRole" disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="profileBio">Bio</label>
+                            <textarea id="profileBio" rows="4" placeholder="Tell us about yourself..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="profileInterests">Interests</label>
+                            <input type="text" id="profileInterests" placeholder="e.g., Computer Science, Mathematics, Physics">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="profileContact">Contact</label>
+                            <input type="text" id="profileContact" placeholder="Phone or alternative email">
+                        </div>
+
+                        <button type="submit" class="btn-primary">Update Profile</button>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <h2>Change Password</h2>
+                    <form id="passwordForm">
+                        <div class="form-group">
+                            <label for="currentPassword">Current Password</label>
+                            <input type="password" id="currentPassword" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="newPassword">New Password</label>
+                            <input type="password" id="newPassword" required minlength="6">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirmNewPassword">Confirm New Password</label>
+                            <input type="password" id="confirmNewPassword" required minlength="6">
+                        </div>
+
+                        <button type="submit" class="btn-primary">Change Password</button>
+                    </form>
+                </div>
+
+                <div class="card danger-zone">
+                    <h2>Danger Zone</h2>
+                    <p>Once you delete your account, there is no going back. Please be certain.</p>
+                    <button id="deleteAccountBtn" class="btn-danger">Delete Account</button>
+                </div>
+            </div>
+
+            <div id="availabilitySection" class="content-section hidden">
+                <h1>My Availability</h1>
+                <p class="subtitle">Manage your mentoring availability</p>
+
+                <div class="card">
+                    <h2>Add Availability Slot</h2>
+                    <form id="availabilityForm">
+                        <div class="form-group">
+                            <label for="slotDate">Date</label>
+                            <input type="date" id="slotDate" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="slotTime">Start Time</label>
+                            <input type="time" id="slotTime" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="slotDuration">Duration (minutes)</label>
+                            <select id="slotDuration" required>
+                                <option value="30">30 minutes</option>
+                                <option value="60">1 hour</option>
+                                <option value="90">1.5 hours</option>
+                                <option value="120">2 hours</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn-primary">Add Slot</button>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <h2>Your Availability Slots</h2>
+                    <div id="availabilityList">
+                        <p class="text-muted">No availability slots yet</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="sessionsSection" class="content-section hidden">
+                <h1>My Sessions</h1>
+                <p class="subtitle">Manage your mentoring sessions</p>
+
+                <div id="sessionAlerts"></div>
+
+                <div class="card" id="pendingBookingsCard" style="display: none;">
+                    <h2>Pending Booking Requests</h2>
+                    <div id="pendingBookingsList">
+                        <p class="text-muted">No pending requests</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>All Sessions</h2>
+                    <div id="sessionsList">
+                        <p class="text-muted">No sessions yet</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="feedbackModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeFeedbackModal()">&times;</span>
+            <h2>Submit Feedback</h2>
+            <form id="feedbackForm">
+                <div class="form-group">
+                    <label for="feedbackRating">Rating</label>
+                    <select id="feedbackRating" required>
+                        <option value="">Select rating</option>
+                        <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+                        <option value="4">⭐⭐⭐⭐ Good</option>
+                        <option value="3">⭐⭐⭐ Average</option>
+                        <option value="2">⭐⭐ Below Average</option>
+                        <option value="1">⭐ Poor</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="feedbackComments">Comments</label>
+                    <textarea id="feedbackComments" rows="4" placeholder="Share your experience..."></textarea>
+                </div>
+                <input type="hidden" id="feedbackBookingId">
+                <button type="submit" class="btn-primary">Submit Feedback</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/dashboard.js"></script>
+</body>
+</html>

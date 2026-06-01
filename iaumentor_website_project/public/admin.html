@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - IAUMentor</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+    <nav class="dashboard-nav">
+        <div class="container">
+            <div class="nav-brand">
+                <h2>IAUMentor - Admin</h2>
+            </div>
+            <div class="nav-user">
+                <a href="/dashboard.html" class="btn-secondary">← Back to Dashboard</a>
+                <button id="logoutBtn" class="btn-secondary">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li class="active"><a href="#" data-view="stats">📊 Statistics</a></li>
+                <li><a href="#" data-view="users">👥 User Management</a></li>
+                <li><a href="#" data-view="reports">🚨 Content Reports</a></li>
+                <li><a href="#" data-view="announcements">📢 Announcements</a></li>
+            </ul>
+        </aside>
+
+        <main class="dashboard-content">
+            <div id="statsView" class="content-section">
+                <h1>System Statistics</h1>
+                <p class="subtitle">Overview of platform activity</p>
+
+                <h2>Users</h2>
+                <div class="stats-grid" id="userStatsGrid">
+                    <p class="text-muted">Loading...</p>
+                </div>
+
+                <h2>Sessions</h2>
+                <div class="stats-grid" id="sessionStatsGrid">
+                    <p class="text-muted">Loading...</p>
+                </div>
+
+                <h2>Content</h2>
+                <div class="stats-grid" id="contentStatsGrid">
+                    <p class="text-muted">Loading...</p>
+                </div>
+
+                <h2>Reports</h2>
+                <div class="stats-grid" id="reportStatsGrid">
+                    <p class="text-muted">Loading...</p>
+                </div>
+            </div>
+
+            <div id="usersView" class="content-section hidden">
+                <h1>User Management</h1>
+                <p class="subtitle">Manage all platform users</p>
+
+                <div id="userAlerts"></div>
+
+                <div class="card">
+                    <div class="search-bar">
+                        <input type="text" id="userSearch" placeholder="Search users by name or email..." class="search-input">
+                    </div>
+                </div>
+
+                <div id="usersTable">
+                    <p class="text-muted">Loading users...</p>
+                </div>
+            </div>
+
+            <div id="reportsView" class="content-section hidden">
+                <h1>Content Reports</h1>
+                <p class="subtitle">Review and moderate reported content</p>
+
+                <div id="reportAlerts"></div>
+
+                <div id="reportsTable">
+                    <p class="text-muted">Loading reports...</p>
+                </div>
+            </div>
+
+            <div id="announcementsView" class="content-section hidden">
+                <h1>Announcements</h1>
+                <p class="subtitle">Create and manage platform announcements</p>
+
+                <div id="announcementAlerts"></div>
+
+                <div class="card">
+                    <h2>Create New Announcement</h2>
+                    <form id="announcementForm">
+                        <div class="form-group">
+                            <label for="announceTitle">Title</label>
+                            <input type="text" id="announceTitle" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="announceBody">Message</label>
+                            <textarea id="announceBody" rows="4" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="announceStartDate">Start Date</label>
+                            <input type="datetime-local" id="announceStartDate" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="announceEndDate">End Date (Optional)</label>
+                            <input type="datetime-local" id="announceEndDate">
+                        </div>
+
+                        <button type="submit" class="btn-primary">Create Announcement</button>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <h2>Existing Announcements</h2>
+                    <div id="announcementsList">
+                        <p class="text-muted">Loading announcements...</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/js/admin.js"></script>
+</body>
+</html>

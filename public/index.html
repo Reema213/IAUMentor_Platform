@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IAUMentor - Peer Mentorship Platform</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/homepage.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h2>IAUMentor</h2>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#booking">Book Session</a></li>
+            </ul>
+            <div class="nav-auth">
+                <a href="/login.html" class="btn-secondary">Login</a>
+                <a href="/signup.html" class="btn-primary">Sign Up</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Connect, Learn, and Grow Together</h1>
+                <p>Join IAU's premier peer mentorship platform where students help students succeed</p>
+                <div class="hero-buttons">
+                    <a href="/signup.html" class="btn-primary btn-large">Get Started</a>
+                    <a href="#about" class="btn-primary btn-large">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About IAUMentor</h2>
+            <p>IAUMentor is a comprehensive peer mentorship platform designed to connect IAU students with experienced mentors who can guide them through their academic journey.</p>
+            <div class="features">
+                <div class="feature-card">
+                    <h3>🎯 Smart Matching</h3>
+                    <p>Our system connects you with mentors based on your interests and academic goals</p>
+                </div>
+                <div class="feature-card">
+                    <h3>💬 Real-time Chat</h3>
+                    <p>Communicate instantly with your mentor through secure messaging</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📚 Resource Library</h3>
+                    <p>Access shared educational materials and study resources</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📅 Easy Scheduling</h3>
+                    <p>Book mentoring sessions at times that work for you</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="service-grid">
+                <div class="service-item">
+                    <h3>One-on-One Mentoring</h3>
+                    <p>Personalized guidance from experienced senior students</p>
+                </div>
+                <div class="service-item">
+                    <h3>Workshops & Events</h3>
+                    <p>Participate in educational workshops and webinars</p>
+                </div>
+                <div class="service-item">
+                    <h3>Resource Sharing</h3>
+                    <p>Access and contribute to our growing knowledge base</p>
+                </div>
+                <div class="service-item">
+                    <h3>Community Forums</h3>
+                    <p>Engage with peers in discussion boards</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="booking" class="booking">
+        <div class="container">
+            <h2>Book a Mentoring Session</h2>
+            <form class="booking-form" id="quickBookingForm">
+                <div class="form-group">
+                    <label for="mentor-select">Select Mentor</label>
+                    <select id="mentor-select" required>
+                        <option value="">Choose a mentor...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="booking-date">Choose Date</label>
+                    <input type="date" id="booking-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="booking-time">Choose Time</label>
+                    <select id="booking-time" required>
+                        <option value="">Select time...</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">Book Now</button>
+                <p class="form-note">Please <a href="/login.html">login</a> or <a href="/signup.html">sign up</a> to book a session</p>
+            </form>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 IAUMentor. All rights reserved.</p>
+            <p>Imam Abdulrahman Bin Faisal University</p>
+        </div>
+    </footer>
+
+    <script src="/js/homepage.js"></script>
+</body>
+</html>

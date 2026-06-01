@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - IAUMentor</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/auth.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h1>IAUMentor</h1>
+                <h2>Create Account</h2>
+                <p>Join our mentorship community</p>
+            </div>
+
+            <div id="alertContainer"></div>
+
+            <form id="signupForm" class="auth-form">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required placeholder="your.email@iau.edu.sa">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required placeholder="At least 6 characters">
+                    <small class="form-hint">Password must be at least 6 characters long</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Re-enter your password">
+                </div>
+
+                <div class="form-group">
+                    <label for="role">I want to be a:</label>
+                    <select id="role" name="role" required>
+                        <option value="">Select your role</option>
+                        <option value="mentee">Mentee (I need guidance)</option>
+                        <option value="mentor">Mentor (I want to help others)</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-primary btn-block" id="signupBtn">
+                    Sign Up
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                <p>Already have an account? <a href="/login.html">Login</a></p>
+                <a href="/index.html" class="back-home">← Back to Home</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/signup.js"></script>
+</body>
+</html>

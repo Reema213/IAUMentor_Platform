@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Forums - IAUMentor</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+    <nav class="dashboard-nav">
+        <div class="container">
+            <div class="nav-brand">
+                <h2>IAUMentor Forums</h2>
+            </div>
+            <div class="nav-user">
+                <a href="/dashboard.html" class="btn-secondary">← Back to Dashboard</a>
+                <button id="logoutBtn" class="btn-secondary">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li class="active"><a href="#" data-view="categories">📂 Categories</a></li>
+                <li id="threadsLink" class="hidden"><a href="#" data-view="threads">📋 Threads</a></li>
+                <li id="threadLink" class="hidden"><a href="#" data-view="thread">💬 Discussion</a></li>
+            </ul>
+            <button class="btn-primary" onclick="openNewThreadModal()" style="margin: 1rem;">+ New Thread</button>
+        </aside>
+
+        <main class="dashboard-content">
+            <div id="categoriesView" class="content-section">
+                <h1>Community Forums</h1>
+                <p class="subtitle">Join discussions, ask questions, and share knowledge</p>
+
+                <div class="card">
+                    <div class="search-bar">
+                        <input type="text" id="forumSearch" placeholder="Search discussions..." class="search-input">
+                        <button id="searchBtn" class="btn-primary">Search</button>
+                    </div>
+                </div>
+
+                <div id="categoriesGrid">
+                    <p class="text-muted">Loading categories...</p>
+                </div>
+            </div>
+
+            <div id="threadsView" class="content-section hidden">
+                <button class="btn-secondary" onclick="backToCategories()">← Back to Categories</button>
+                <h1 id="categoryTitle">Category</h1>
+                <p class="subtitle" id="categoryDesc"></p>
+
+                <div id="threadsGrid">
+                    <p class="text-muted">Loading threads...</p>
+                </div>
+            </div>
+
+            <div id="threadView" class="content-section hidden">
+                <button class="btn-secondary" onclick="backToThreads()">← Back to Threads</button>
+                <div id="threadContent">
+                    <p class="text-muted">Loading thread...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="newThreadModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeNewThreadModal()">&times;</span>
+            <h2>Create New Thread</h2>
+            
+            <div id="threadAlerts"></div>
+
+            <form id="newThreadForm">
+                <div class="form-group">
+                    <label for="threadCategory">Category</label>
+                    <select id="threadCategory" required>
+                        <option value="">Select category</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="threadTitle">Title</label>
+                    <input type="text" id="threadTitle" required placeholder="What's your question or topic?">
+                </div>
+
+                <div class="form-group">
+                    <label for="threadContentDetails">Content</label>
+                    <textarea id="threadContentDetails" rows="8" required placeholder="Provide details..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-primary">Post Thread</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/forums.js"></script>
+</body>
+</html>

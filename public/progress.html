@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Tracking - IAUMentor</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+    <nav class="dashboard-nav">
+        <div class="container">
+            <div class="nav-brand">
+                <h2>IAUMentor</h2>
+            </div>
+            <div class="nav-user">
+                <a href="/dashboard.html" class="btn-secondary">← Back to Dashboard</a>
+                <button id="logoutBtn" class="btn-secondary">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li class="active"><a href="#" data-view="overview">📊 Overview</a></li>
+                <li><a href="#" data-view="goals">🎯 My Goals</a></li>
+                <li><a href="#" data-view="create">➕ Create Goal</a></li>
+            </ul>
+        </aside>
+
+        <main class="dashboard-content">
+            <div id="overviewView" class="content-section">
+                <h1>Progress Overview</h1>
+                <p class="subtitle">Track your academic and personal development</p>
+
+                <div class="stats-grid" id="progressStatsGrid">
+                    <p class="text-muted">Loading statistics...</p>
+                </div>
+
+                <div class="card">
+                    <h2>Goals by Category</h2>
+                    <div id="categoryBreakdown">
+                        <p class="text-muted">Loading...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="goalsView" class="content-section hidden">
+                <h1>My Goals</h1>
+                <p class="subtitle">Manage your goals and track progress</p>
+
+                <div class="card">
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                        <select id="statusFilter" style="padding: 0.5rem; border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); background-color: var(--white);">
+                            <option value="all">All Goals</option>
+                            <option value="not_started">Not Started</option>
+                            <option value="in_progress">In Progress</option>
+                            <option value="completed">Completed</option>
+                            <option value="abandoned">Abandoned</option>
+                        </select>
+                        <select id="categoryFilter" style="padding: 0.5rem; border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); background-color: var(--white);">
+                            <option value="all">All Categories</option>
+                            <option value="academic">Academic</option>
+                            <option value="personal">Personal</option>
+                            <option value="career">Career</option>
+                            <option value="skill">Skill</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="goalsGrid" class="mentors-grid">
+                    <p class="text-muted">Loading goals...</p>
+                </div>
+            </div>
+
+            <div id="createView" class="content-section hidden">
+                <h1>Create New Goal</h1>
+                <p class="subtitle">Set a new goal to track your progress</p>
+
+                <div id="createAlerts"></div>
+
+                <div class="card">
+                    <form id="createGoalForm">
+                        <div class="form-group">
+                            <label for="goalTitle">Goal Title</label>
+                            <input type="text" id="goalTitle" required placeholder="e.g., Master Data Structures">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="goalDescription">Description</label>
+                            <textarea id="goalDescription" rows="4" placeholder="Describe what you want to achieve..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="goalCategory">Category</label>
+                            <select id="goalCategory" required>
+                                <option value="">Select category</option>
+                                <option value="academic">Academic</option>
+                                <option value="personal">Personal</option>
+                                <option value="career">Career</option>
+                                <option value="skill">Skill Development</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="goalTargetDate">Target Date</label>
+                            <input type="date" id="goalTargetDate">
+                        </div>
+
+                        <button type="submit" class="btn-primary">Create Goal</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="goalDetailModal" class="modal hidden">
+        <div class="modal-content" style="max-width: 800px;">
+            <span class="modal-close" onclick="closeGoalModal()">&times;</span>
+            <div id="goalModalBody">
+                <p class="text-muted">Loading goal details...</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="editGoalModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeEditGoalModal()">&times;</span>
+            <h2>Edit Goal</h2>
+            
+            <div id="editAlerts"></div>
+
+            <form id="editGoalForm">
+                <input type="hidden" id="editGoalId">
+                
+                <div class="form-group">
+                    <label for="editGoalTitle">Goal Title</label>
+                    <input type="text" id="editGoalTitle" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="editGoalDescription">Description</label>
+                    <textarea id="editGoalDescription" rows="4"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="editGoalCategory">Category</label>
+                    <select id="editGoalCategory" required>
+                        <option value="academic">Academic</option>
+                        <option value="personal">Personal</option>
+                        <option value="career">Career</option>
+                        <option value="skill">Skill Development</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="editGoalTargetDate">Target Date</label>
+                    <input type="date" id="editGoalTargetDate">
+                </div>
+
+                <div class="form-group">
+                    <label for="editGoalStatus">Status</label>
+                    <select id="editGoalStatus" required>
+                        <option value="not_started">Not Started</option>
+                        <option value="in_progress">In Progress</option>
+                        <option value="completed">Completed</option>
+                        <option value="abandoned">Abandoned</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-primary">Update Goal</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/progress.js"></script>
+</body>
+</html>

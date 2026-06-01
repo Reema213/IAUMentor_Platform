@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages - IAUMentor</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <style>
+        .messages-container {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            height: calc(100vh - 70px);
+            overflow: hidden;
+        }
+        
+        .conversations-panel {
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .search-box {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+        }
+        
+        .conversations-list {
+            flex: 1;
+            overflow-y: auto;
+        }
+        
+        .conversation-item {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .conversation-item:hover {
+            background: var(--light-color);
+        }
+        
+        .conversation-item.active {
+            background: var(--light-color);
+            border-left: 3px solid var(--primary-color);
+        }
+        
+        .conversation-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .conversation-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .conversation-time {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+        
+        .conversation-preview {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .unread-badge {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            margin-left: 0.5rem;
+        }
+        
+        .chat-panel {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chat-header {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            background: var(--white);
+        }
+        
+        .chat-header h3 {
+            margin: 0;
+            color: var(--primary-color);
+        }
+        
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            background: var(--light-color);
+        }
+        
+        .message-bubble {
+            max-width: 70%;
+            margin-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .message-bubble.sent {
+            align-self: flex-end;
+            margin-left: auto;
+        }
+        
+        .message-bubble.received {
+            align-self: flex-start;
+        }
+        
+        .message-content {
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            word-wrap: break-word;
+        }
+        
+        .message-bubble.sent .message-content {
+            background: var(--primary-color);
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+        
+        .message-bubble.received .message-content {
+            background: white;
+            color: var(--text-primary);
+            border-bottom-left-radius: 4px;
+        }
+        
+        .message-time {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+            padding: 0 0.5rem;
+        }
+        
+        .message-bubble.sent .message-time {
+            text-align: right;
+        }
+        
+        .chat-input-area {
+            padding: 1rem;
+            border-top: 1px solid var(--border-color);
+            background: white;
+        }
+        
+        .chat-input-form {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .chat-input-form textarea {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            resize: none;
+            font-family: inherit;
+        }
+        
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--text-secondary);
+        }
+        
+        .empty-state h3 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .new-chat-btn {
+            margin: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .messages-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .conversations-panel.hidden-mobile {
+                display: none;
+            }
+            
+            .chat-panel.hidden-mobile {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="dashboard-nav">
+        <div class="container">
+            <div class="nav-brand">
+                <h2>IAUMentor</h2>
+            </div>
+            <div class="nav-user">
+                <a href="/dashboard.html" class="btn-secondary">← Back to Dashboard</a>
+                <button id="logoutBtn" class="btn-secondary">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="messages-container">
+        <div class="conversations-panel">
+            <button class="btn-primary new-chat-btn" onclick="openNewChatModal()">+ New Message</button>
+            
+            <div class="search-box">
+                <input type="text" id="conversationSearch" placeholder="Search conversations...">
+            </div>
+            
+            <div class="conversations-list" id="conversationsList">
+                <div class="empty-state">
+                    <p>Loading conversations...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-panel" id="chatPanel">
+            <div class="empty-state">
+                <h3>💬 Welcome to Messages</h3>
+                <p>Select a conversation to start messaging</p>
+                <button class="btn-primary" onclick="openNewChatModal()">Start New Conversation</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="newChatModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeNewChatModal()">&times;</span>
+            <h2>New Message</h2>
+            
+            <div class="form-group">
+                <label>Search Users</label>
+                <input type="text" id="userSearch" placeholder="Search by name or email...">
+            </div>
+            
+            <div id="userSearchResults" style="max-height: 300px; overflow-y: auto; margin-top: 1rem;">
+                <p class="text-muted">Type to search for users...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/messages.js"></script>
+</body>
+</html>
